@@ -8,6 +8,13 @@
 ;;                    (dired-directory dired-directory "%b"))))
 ;; --------------------------------------------------
 
+;; -------- yasnippet --------
+ (add-to-list 'load-path "~/.emacs.d/site-lisp/yasnippet-0.6.1c")
+ (require 'yasnippet) ;; not yasnippet-bundle
+ (yas/initialize)
+ (yas/load-directory "~/.emacs.d/site-lisp/yasnippet-0.6.1c/snippets")
+;; --------------------------------------------------
+
 ;; -------- highlight-tail-colors
 (load-file "~/.emacs.d/site-lisp/highlight-tail.el")
 (highlight-tail-mode t)
