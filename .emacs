@@ -110,3 +110,65 @@
 (setq ecb-auto-activate nil
       ecb-tip-of-the-day nil)
 ;; --------------------------------------------------
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(ecb-options-version "2.40"))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+
+
+;;
+;; -------- ace jump mode major function --------
+;; https://github.com/winterTTr/ace-jump-mode
+(add-to-list 'load-path "~/.emacs.d/site-lisp/")
+(autoload
+  'ace-jump-mode
+  "ace-jump-mode"
+  "Emacs quick move minor mode"
+  t)
+;; you can select the key you prefer to
+(define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
+
+;; 
+;; enable a more powerful jump back function from ace jump mode
+;;
+(autoload
+  'ace-jump-mode-pop-mark
+  "ace-jump-mode"
+  "Ace jump back:-)"
+  t)
+(eval-after-load "ace-jump-mode"
+  '(ace-jump-mode-enable-mark-sync))
+;;(define-key global-map (kbd "C-c SPC") 'ace-jump-mode-pop-mark)
+
+;;If you use viper mode :
+;;(define-key viper-vi-global-user-map (kbd "SPC") 'ace-jump-mode)
+;;If you use evil
+;;(define-key evil-normal-state-map (kbd "SPC") 'ace-jump-mode)
+;; --------------------------------------------------
+
+;;
+;; -------- mark multi-line --------
+;;
+(add-to-list 'load-path "~/.emacs.d/site-lisp/mark-multiple.el/")
+;;(require 'multiple-cursors)
+;;(require 'inline-string-rectangle)
+;;(global-set-key (kbd "C-x r t") 'inline-string-rectangle)
+
+(require 'mark-more-like-this)
+(global-set-key (kbd "C-<") 'mark-previous-like-this)
+(global-set-key (kbd "C->") 'mark-next-like-this)
+(global-set-key (kbd "C-M-m") 'mark-more-like-this) ; like the other two, but takes an argument (negative is previous)
+(global-set-key (kbd "C-*") 'mark-all-like-this)
+
+;;(add-hook 'sgml-mode-hook
+;;          (lambda ()
+;;            (require 'rename-sgml-tag)
+;;            (define-key sgml-mode-map (kbd "C-c C-r") 'rename-sgml-tag)))
