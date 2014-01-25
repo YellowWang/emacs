@@ -1,5 +1,10 @@
+
 ;; -------- c# hightlight --------
 (load-file "~/.emacs.d/site-lisp/csharp-mode-0.8.5.el")
+;; --------------------------------------------------
+
+;; -------- shaderlab --------
+(load-file "~/.emacs.d/site-lisp/shaderlab-mode.el")
 ;; --------------------------------------------------
 
 ;; -------- title format --------
@@ -181,14 +186,30 @@
 ;; --------------------------------------------------
 
 ;;
+;; -------- flymake ---------
+;; 
+(add-to-list 'load-path "~/.emacs.d/site-lisp/flymake/")  
+(require 'flymake)
+;; Let's run 8 checks at once instead.
+(setq flymake-max-parallel-syntax-checks 8)
+;; I want to see at most the first 4 errors for a line.
+(setq flymake-number-of-errors-to-display 4)
+(autoload 'flymake-find-file-hook "flymake" "" t)
+(add-hook 'find-file-hook 'flymake-find-file-hook)
+(setq flymake-gui-warnings-enabled nil)
+(setq flymake-log-level 0)
+;;
 ;; -------- helm --------
 ;; https://github.com/emacs-helm/helm
+
+;;(setq max-specpdl-size 70000)
+;;(setq debug-on-error t)
+;;(setq max-lisp-eval-depth 1800)
+
 (add-to-list 'load-path "~/.emacs.d/site-lisp/helm/")
-(require 'helm-config)
+;;(require 'helm-config)
 ;;(global-set-key (kbd "C-c h") 'helm-mini)
-(helm-mode 1)
-(defvar folders (list  "~/test/")
-  "test")
+;;(helm-mode 1)
 
 (require 'helm-files)
 (setq helm-idle-delay 0.1)
