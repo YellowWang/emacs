@@ -123,7 +123,6 @@
  ;; If there is more than one, they won't work right.
  )
 
-
 ;;
 ;; -------- ace jump mode major function --------
 ;; https://github.com/winterTTr/ace-jump-mode
@@ -156,7 +155,7 @@
 
 ;;
 ;; -------- mark multi-line --------
-;;
+;; https://github.com/magnars/mark-multiple.el
 (add-to-list 'load-path "~/.emacs.d/site-lisp/mark-multiple.el/")
 ;;(require 'multiple-cursors)
 ;;(require 'inline-string-rectangle)
@@ -167,8 +166,34 @@
 (global-set-key (kbd "C->") 'mark-next-like-this)
 (global-set-key (kbd "C-M-m") 'mark-more-like-this) ; like the other two, but takes an argument (negative is previous)
 (global-set-key (kbd "C-*") 'mark-all-like-this)
-
 ;;(add-hook 'sgml-mode-hook
 ;;          (lambda ()
 ;;            (require 'rename-sgml-tag)
 ;;            (define-key sgml-mode-map (kbd "C-c C-r") 'rename-sgml-tag)))
+;; --------------------------------------------------
+
+;;
+;; -------- expand-region --------
+;; https://github.com/magnars/expand-region.el
+(add-to-list 'load-path "~/.emacs.d/site-lisp/expand-region/")  
+(require 'expand-region)  
+(global-set-key (kbd "C-=") 'er/expand-region)  
+;; --------------------------------------------------
+
+;;
+;; -------- helm --------
+;; https://github.com/emacs-helm/helm
+(add-to-list 'load-path "~/.emacs.d/site-lisp/helm/")
+(require 'helm-config)
+;;(global-set-key (kbd "C-c h") 'helm-mini)
+(helm-mode 1)
+(defvar folders (list  "~/test/")
+  "test")
+
+(require 'helm-files)
+(setq helm-idle-delay 0.1)
+(setq helm-input-idle-delay 0.1)
+(setq helm-c-locate-command "locate-with-mdfind %.0s %s")
+(loop for ext in '("\\.swf$" "\\test\.cs$" "\\.pyc$")
+      do (add-to-list 'helm-c-boring-file-regexp-list ext))
+(define-key global-map [(alt t)] 'helm-for-files))
